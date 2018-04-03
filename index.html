@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>天气app</title>
+	<link rel="stylesheet" href="css/public.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/rem.js"></script>
+	<link rel="icon" href="img/logo.png" type="image/png">
+</head>
+<body>
+	<!-- 当前信息 -->
+	<section id="now">
+		<!-- 当前城市 -->
+		<h1 class="now_city">
+			<span class="address_icon">&#xe61f;</span>
+			<span class="now_city_name"></span>
+		</h1>
+		<!-- 当前空气质量 -->
+		<div class="now_all">
+			<h1>空气</h1>
+			<h2></h2>
+		</div>
+
+		<!-- 当前温度 -->
+		<h2 class="now_temp">
+			<span></span>℃
+		</h2>
+
+		<!-- 当前天气状况 -->
+		<h3 class="now_status"></h3>
+
+		<!-- 当前风向以及风级 -->
+		<div class="now_wind_box">
+			<span class="now_wind"></span>
+			<span class="now_wind_leavel"></span>
+
+		</div>
+
+		<!-- 当前祝语 -->
+		<p class="notice"></p>
+	</section>
+
+	<!-- 未来两天信息 -->
+	<section id="future">
+		<!--<div class="future_box today">-->
+			<!--<div class="future_top">-->
+				<!--<span class="future_date">今天</span>-->
+				<!--<p><span class="today_hightemp">4</span>/<span class="today_lowtemp">-10</span>°C</p>-->
+			<!--</div>-->
+			<!--<div class="future_top">-->
+				<!--<span class="today_weather">多云</span>-->
+				<!--<div class="today_img">-->
+					<!--<img src="img/1.png" alt="">-->
+				<!--</div>-->
+
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="future_box tomorrow">-->
+			<!--<div class="future_top">-->
+				<!--<span class="future_date">明天</span>-->
+				<!--<p><span class="tomorrow_hightemp">5</span>/<span class="tomorrow_lowtemp">-7</span>°C</p>-->
+			<!--</div>-->
+			<!--<div class="future_top">-->
+				<!--<span class="tomorrow_weather">多云</span>-->
+				<!--<div class="tomorrow_img">-->
+					<!--<img src="img/1.png" alt="">-->
+				<!--</div>-->
+
+			<!--</div>-->
+		<!--</div>-->
+	</section>
+
+	<!-- 未来24小时的信息 -->
+	<ul id="hours">
+
+	</ul>
+
+	<!-- 未来一周的信息 -->
+	<ul id="week">
+
+	</ul>
+
+	<main id="citys">
+		<header>
+			<input type="text" class="search" placeholder="请输入搜索内容">
+			<h2 class="search_btn">取消</h2>
+		</header>
+		<div class="content">
+			<!--<div class="remen1">-->
+				<!--<h1 class="remen_name">热门城市</h1>-->
+				<!--<ul class="remen_city">-->
+					<!--<li>北京</li>-->
+					<!--<li>上海</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>成都</li>-->
+					<!--<li>广州</li>-->
+					<!--<li>深圳</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+			<!--<div class="remen">-->
+				<!--<h1 class="remen_name">贵州</h1>-->
+				<!--<ul class="remen_city">-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+			<!--<div class="remen">-->
+				<!--<h1 class="remen_name">河南</h1>-->
+				<!--<ul class="remen_city">-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+			<!--<div class="remen">-->
+				<!--<h1 class="remen_name">山东</h1>-->
+				<!--<ul class="remen_city">-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+					<!--<li>太原</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		</div>
+	</main>
+	<script src="js/jquery.js"></script>
+	<script>
+        //得到城市
+        $.getScript("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js",function(){
+            var data=remote_ip_info;
+            var city=data.city;
+            getWeather(city);
+        });
+        //得到城市天气函数
+        function getWeather(city){
+            $.ajax({
+                url:"http://api.jisuapi.com/weather/query?appkey=c18309f2dbc80b51&city="+city,
+                dataType:"jsonp",
+                success:function(r){
+                    $(".now_city_name").html(city);
+                    $(".now_temp span").html(r.result.temp);
+                    $(".now_status").html(r.result.weather);
+                    $(".now_wind").html(r.result.winddirect);
+                    // $(".now_wind_leavel").html(r.result.windpower);
+                    //七天的信息
+                    let data1=r.result.daily;
+                    //24小时的信息
+                    let data2=r.result.hourly;
+                    //提示
+                    let data3=r.result.index;
+                    console.log(data1);
+                    console.log(data2);
+                    console.log(data3);
+                    let weeks="";
+                    let hours="";
+                    let futures="";
+                    $.each(data1,function(index,val){
+                        if(index===0){
+                            futures+=`
+							 <div class="future_box today">
+								<div class="future_top">
+									<span class="future_date">今天</span>
+									<p><span class="today_hightemp">${val.day.temphigh}</span>/<span class="today_hightemp">${val.night.templow}</span>°C</p>
+								</div>
+								<div class="future_top">
+									<span class="today_weather">${val.day.weather}/${val.night.weather}</span>
+									<div class="today_img"><img src="weathercn02/${val.day.img}.png">/<img src="weathercn/${val.night.img}.png"></div>
+                        		</div>
+                        	</div>
+                            `;
+						}else if(index===1){
+                            futures+=`
+							<div class="future_box tomorrow">
+								<div class="future_top">
+									<span class="future_date">明天</span>
+									<p><span class="tomorrow_hightemp">${val.day.temphigh}</span>/<span class="tomorrow_lowtemp">${val.night.templow}</span>°C</p>
+								</div>
+								<div class="future_top">
+									<span class="tomorrow_weather">${val.day.weather}/${val.night.weather}</span>
+									<div class="tomorrow_img"><img src="weathercn02/${val.day.img}.png">/<img src="weathercn/${val.night.img}.png"></div>
+							</div>
+							`;
+						}
+                        weeks+=`<li>
+                        	<h1 class="week_date">${val.date}</h1>
+                        	<h2 class="week_weather">${val.day.weather}/${val.night.weather}</h2>
+                        	<div class="week_img"><img src="weathercn02/${val.day.img}.png">/<img src="weathercn/${val.night.img}.png"></div>
+                        	<h3 class="week_hightemp">${val.day.temphigh}℃</h3>
+                        	<h4 class="week_lowtemp">${val.night.templow}℃</h4>
+                        	<h5 class="week_wind">${val.day.winddirect}</h5>
+                        	<h6 class="week_level">${val.day.windpower}</h6>
+							</li>
+                        `;
+                    });
+					$("#week").html(weeks);
+					$("#future").html(futures);
+                    $.each(data2,function(index,val){
+                        hours+=`<li>
+							<h1 class="hours_time">${val.time}</h1>
+							<div class="hours_img"><img src="weathercn02/${val.img}.png">/<img src="weathercn/${val.img}.png"></div>
+							<h2 class="hours_temp"><span>${val.temp}</span>℃</h2>
+						</li>
+                        `;
+                    });
+                    $("#hours").html(hours);
+					$.each(data3,function(index,val){
+						if(index===1){
+						    $(".notice").html(val.detail);
+						}else if(index===5){
+							$(".now_all h2").html(val.ivalue);
+						}
+					});
+                }
+            });
+        }
+        $(".address_icon").click(function(){
+            $("#citys").show();
+            var data=[];//存放所有数据
+            var provice=[];//存放所有省的数据
+            var city=[];//存放某个省的所有市
+			function render(){
+                $.ajax({
+                    url:"http://api.jisuapi.com/weather/city?appkey=2e601484516e5a9d",
+                    dataType:"jsonp",
+                    success:function (r) {
+                        data=r.result;
+                        provice=$.grep(data,function(val,index){
+                            if(val.parentid==="0"){
+                                return true;
+                            }
+                        });
+                        let str=`<ul class="remen_city">`;
+                        $.each(provice,function (index,val) {
+                            str+=`<li>
+							<h1 class="remen_name" id="${val.cityid}">${val.city}</h1>
+                        </li>`;
+                        });
+                        str+="</ul>";
+                        $(".content").html(str);
+                    }
+                });
+			}
+            render();
+            $("#citys").on("click",".remen_name",function(e){
+                var target=e.target;
+				var pro=target.innerHTML;
+                var id=$(this).attr("id");
+                city=$.grep(data,function(val,index){
+                    if(val.parentid===id){
+                        return true;
+                    }
+                });
+                let str=`<button class="return">&lt;${pro}</button><ul class="remen_city">`;
+                $.each(city,function (index,val) {
+                    str+=`
+						<li class="city">${val.city}</li>
+                    `;
+                });
+                str+="</ul>";
+                $(".content").html(str);
+                $(".return").click(function () {
+                	render();
+                });
+            });
+            // 城市
+            $("#citys").on("click",".city",function(){
+                $("#citys").hide();
+                getWeather($(this).html());
+            });
+        });
+        $(".search_btn").click(function(){
+            $("#citys").hide();
+		});
+	</script>
+</body>
+</html>

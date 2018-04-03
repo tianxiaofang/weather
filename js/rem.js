@@ -21,13 +21,3 @@ window.onresize = function(){
    resize(1080,"x"); 
 }
 
-
-
-// 750       100px     1rem(html fontSize 100px)  1rem = 100px   1rem
-
-// 375       50px                                 1rem = 50px
-
-// 750     100       750        100
-//     =                   =  
-// 375     ?         414         ?
-  
