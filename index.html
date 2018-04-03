@@ -90,75 +90,7 @@
 			<h2 class="search_btn">取消</h2>
 		</header>
 		<div class="content">
-			<!--<div class="remen1">-->
-				<!--<h1 class="remen_name">热门城市</h1>-->
-				<!--<ul class="remen_city">-->
-					<!--<li>北京</li>-->
-					<!--<li>上海</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>成都</li>-->
-					<!--<li>广州</li>-->
-					<!--<li>深圳</li>-->
-				<!--</ul>-->
-			<!--</div>-->
-			<!--<div class="remen">-->
-				<!--<h1 class="remen_name">贵州</h1>-->
-				<!--<ul class="remen_city">-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-				<!--</ul>-->
-			<!--</div>-->
-			<!--<div class="remen">-->
-				<!--<h1 class="remen_name">河南</h1>-->
-				<!--<ul class="remen_city">-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-				<!--</ul>-->
-			<!--</div>-->
-			<!--<div class="remen">-->
-				<!--<h1 class="remen_name">山东</h1>-->
-				<!--<ul class="remen_city">-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-					<!--<li>太原</li>-->
-				<!--</ul>-->
-			<!--</div>-->
+
 		</div>
 	</main>
 	<script src="js/jquery.js"></script>
@@ -168,18 +100,19 @@
             var data=remote_ip_info;
             var city=data.city;
             getWeather(city);
+            console.log(data);
         });
         //得到城市天气函数
         function getWeather(city){
             $.ajax({
-                url:"http://api.jisuapi.com/weather/query?appkey=c18309f2dbc80b51&city="+city,
+                url:"http://api.jisuapi.com/weather/query?appkey=1b9f33ec94690221&city="+city,
                 dataType:"jsonp",
                 success:function(r){
                     $(".now_city_name").html(city);
                     $(".now_temp span").html(r.result.temp);
                     $(".now_status").html(r.result.weather);
                     $(".now_wind").html(r.result.winddirect);
-                    // $(".now_wind_leavel").html(r.result.windpower);
+                    $(".now_wind_leavel").html(r.result.windpower);
                     //七天的信息
                     let data1=r.result.daily;
                     //24小时的信息
